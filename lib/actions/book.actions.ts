@@ -148,6 +148,7 @@ export const getBookBySlug = async (slug: string) => {
 
 export const saveBookSegments = async (bookId: string, clerkId: string, segments: TextSegment[]) => {
     try {
+        console.log("fdgh", bookId, clerkId, segments.length)
         await connectToDatabase();
 
         console.log('Saving book segments...');
