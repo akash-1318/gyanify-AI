@@ -32,9 +32,10 @@ export const getAllBooks = async (search?: string) => {
             data: serializeData(books)
         }
     } catch (e) {
+        const errorMessage = e instanceof Error ? e.message : String(e);
         console.error('Error connecting to database', e);
         return {
-            success: false, error: e
+            success: false, error: errorMessage
         }
     }
 }
@@ -58,9 +59,10 @@ export const checkBookExists = async (title: string) => {
             exists: false,
         }
     } catch (e) {
+        const errorMessage = e instanceof Error ? e.message : String(e);
         console.error('Error checking book exists', e);
         return {
-            exists: false, error: e
+            exists: false, error: errorMessage
         }
     }
 }
@@ -115,11 +117,12 @@ export const createBook = async (data: CreateBook) => {
             data: serializeData(book),
         }
     } catch (e) {
+        const errorMessage = e instanceof Error ? e.message : String(e);
         console.error('Error creating a book', e);
 
         return {
             success: false,
-            error: e,
+            error: errorMessage,
         }
     }
 }
@@ -139,9 +142,10 @@ export const getBookBySlug = async (slug: string) => {
             data: serializeData(book)
         }
     } catch (e) {
+        const errorMessage = e instanceof Error ? e.message : String(e);
         console.error('Error fetching book by slug', e);
         return {
-            success: false, error: e
+            success: false, error: errorMessage
         }
     }
 }
@@ -168,11 +172,12 @@ export const saveBookSegments = async (bookId: string, clerkId: string, segments
             data: { segmentsCreated: segments.length}
         }
     } catch (e) {
+        const errorMessage = e instanceof Error ? e.message : String(e);
         console.error('Error saving book segments', e);
 
         return {
             success: false,
-            error: e,
+            error: errorMessage,
         }
     }
 }
@@ -224,10 +229,11 @@ export const searchBookSegments = async (bookId: string, query: string, limit: n
             data: serializeData(segments),
         };
     } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : String(error);
         console.error('Error searching segments:', error);
         return {
             success: false,
-            error: (error as Error).message,
+            error: errorMessage,
             data: [],
         };
     }
